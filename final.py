@@ -28,7 +28,7 @@ class CrawlerAIF:
         self.data = []
 
     def get_database_keywords(self):
-        conn = sqlite3.connect('db.sqlite3')
+        conn = sqlite3.connect('finalochka.sqlite3')
         cursor = conn.cursor()
 
         query = 'SELECT keyword FROM keywords'
@@ -78,7 +78,7 @@ class CrawlerAIF:
             })
 
     def insert_data(self, data):
-        conn = sqlite3.connect('db.sqlite3')
+        conn = sqlite3.connect('finalochka.sqlite3')
         cursor = conn.cursor()
 
         for article in data:
@@ -147,7 +147,6 @@ class CrawlerAIF:
             self.extract(payload['data'])
             print(f'Страница {page}, всего: {len(self.data)}')
 
-            # выходим, если сервер сказал "всё" или страница ничего не дала
             if payload.get('isFinished') or len(self.data) == before:
                 break
             page += 1
